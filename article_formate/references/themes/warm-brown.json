@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "name": "暖棕金 · 理财/成长/生活主题",
+    "suit": "理财 / 成长 / 生活类",
+    "note": "基于《公众号排版完全指南》配色方法论生成。所有卡片统一用 <blockquote>（公众号最稳容器），分割线用 <hr>，全程内联样式；设计令牌单一真源，改 tokens 一处即全局换肤。"
+  },
+  "heading_badge": true,
+  "page": {
+    "background": "#ffffff",
+    "font_family": "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+    "max_width": "640px",
+    "margin": "0 auto",
+    "padding": "24px 18px",
+    "line_height": "1.9",
+    "letter_spacing": "0.03em",
+    "font_size": "16px"
+  },
+  "tokens": {
+    "max_width": "640px",
+    "base_font": "16px",
+    "line_height": "1.9",
+    "paragraph_spacing": "1.5em",
+    "font_family": "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+    "primary": "#8d6e63",
+    "accent": "#8d6e63",
+    "deep": "#4e342e",
+    "text": "#3e3e3e",
+    "gray": "#a0847a",
+    "highlight_bg": "#f5ede8",
+    "highlight_color": "#4e342e",
+    "card_bg": "#f5ede8",
+    "divider": "#e8ddd5"
+  },
+  "blocks": {
+    "body": {
+      "font_size": "@base_font",
+      "color": "@text",
+      "line_height": "@line_height",
+      "letter_spacing": "0.5px",
+      "paragraph_spacing": "@paragraph_spacing",
+      "text_align": "justify"
+    },
+    "h1": {
+      "font_size": "22px",
+      "color": "@deep",
+      "font_weight": "bold",
+      "text_align": "center",
+      "margin": "0 0 0.8em",
+      "line_height": "1.4",
+      "border_bottom": "3px solid @primary",
+      "padding_bottom": "10px"
+    },
+    "h2": {
+      "font_size": "19px",
+      "color": "@primary",
+      "font_weight": "bold",
+      "text_align": "left",
+      "margin": "1.4em 0 0.7em",
+      "line_height": "1.5"
+    },
+    "h3": {
+      "font_size": "17px",
+      "color": "@primary",
+      "font_weight": "bold",
+      "text_align": "left",
+      "margin": "1.2em 0 0.5em",
+      "padding_left": "10px",
+      "border_left": "3px solid @primary",
+      "line_height": "1.5"
+    },
+    "strong": "@primary",
+    "mark": {
+      "bg": "@highlight_bg",
+      "color": "@highlight_color"
+    },
+    "quote": {
+      "background": "@card_bg",
+      "border_left": "4px solid @accent",
+      "color": "@text",
+      "padding": "16px 20px",
+      "margin": "1.5em 0",
+      "font_size": "16px",
+      "line_height": "1.9"
+    },
+    "divider": {
+      "border_top": "1px solid @divider",
+      "margin": "2em 0"
+    },
+    "list": {
+      "item_spacing": "0.5em",
+      "color": "@text",
+      "marker": "@primary"
+    },
+    "image": {
+      "caption_color": "@gray",
+      "caption_size": "14px",
+      "caption_align": "center",
+      "caption_letter_spacing": "1px",
+      "radius": "0"
+    },
+    "callout_tip": {
+      "bg": "@card_bg",
+      "color": "@primary"
+    },
+    "callout_warning": {
+      "bg": "@card_bg",
+      "color": "@primary"
+    },
+    "callout_info": {
+      "bg": "@card_bg",
+      "color": "@gray"
+    },
+    "section_title": {
+      "background": "@highlight_bg",
+      "color": "@deep",
+      "font_size": "19px",
+      "font_weight": "bold",
+      "display": "inline-block",
+      "padding": "0 6px",
+      "margin": "1.5em 0 0.6em",
+      "line_height": "1.5"
+    },
+    "item_title": {
+      "color": "@primary",
+      "font_size": "17px",
+      "font_weight": "bold",
+      "margin": "1.2em 0 0.4em"
+    },
+    "intro": {
+      "background": "@card_bg",
+      "color": "@gray",
+      "font_size": "15px",
+      "letter_spacing": "1px",
+      "text_align": "center",
+      "line_height": "1.9",
+      "padding": "14px 18px",
+      "margin": "0 0 1.2em"
+    },
+    "footer": {
+      "color": "@gray",
+      "font_size": "14px",
+      "text_align": "center",
+      "margin": "2em 0 0",
+      "border_top": "1px solid @divider",
+      "padding_top": "16px"
+    },
+    "action_tip": {
+      "background": "@card_bg",
+      "border_left": "4px solid @primary",
+      "color": "@primary",
+      "font_size": "16px",
+      "margin": "1.2em 0",
+      "line_height": "1.8",
+      "padding": "12px 16px"
+    },
+    "tip_box": {
+      "background": "@card_bg",
+      "border_left": "4px solid @primary",
+      "padding": "14px 18px",
+      "margin": "1.5em 0",
+      "color": "@text",
+      "font_size": "15px",
+      "line_height": "1.7"
+    }
+  }
+}

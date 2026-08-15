@@ -1,0 +1,3 @@
+# article_formate - 公众号排版系列（clone/draft/preview）共享依赖（统一版本）
+# 说明：article-format-clone 使用 BeautifulSoup 解析 HTML；draft / preview 仅用标准库。
+beautifulsoup4==4.12.3

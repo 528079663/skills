@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "name": "普罗的小生活 · 育儿公众号主题（已校准，五步法令牌版）",
+    "extracted_from": [
+      "[202606211034]儿科医生都建议多光脚宝宝光脚好处超多真正的坏处就这一个",
+      "[202605300910]宝宝不会说话但会发暗号你能看懂几个",
+      "[202606051217]睡觉满床滚频繁夜醒可能宝宝在向你传递这6个信号",
+      "[202606130820]一岁内这9种食物不要喂给娃吃一口都不行",
+      "[202606151657]12个伤宝宝脊柱的习惯很多老人都在犯别再这样带娃了"
+    ],
+    "note": "已根据 5 篇样本文章校准。核心特征：小标题为浅蓝底+蓝色顶边+蓝色粗字的「蓝标」（primary=蓝 #2E81DA）；关键词加粗为朱红（accent=#D92142）；重点句黄底高亮；图注为灰色小字（字距 2px）。正文近黑 16px、行距 1.8。tokens 为设计令牌单一真源，blocks 内以 @token 引用。"
+  },
+  "page": {
+    "background": "#ffffff",
+    "font_family": "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "tokens": {
+    "primary": "#2E81DA",
+    "accent": "#D92142",
+    "highlight_bg": "#FFFB00",
+    "text": "#1a1a1a",
+    "gray": "#888888",
+    "max_width": "677px",
+    "base_font": "16px",
+    "line_height": "1.8",
+    "paragraph_spacing": "1.2em",
+    "section_top": "1.5em",
+    "divider_margin": "2em 0",
+    "image_margin": "1em auto",
+    "font_family": "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "blocks": {
+    "body": { "font_size": "@base_font", "color": "@text", "line_height": "@line_height", "letter_spacing": "0.5px", "paragraph_spacing": "@paragraph_spacing", "text_align": "justify" },
+    "h1": { "font_size": "20px", "color": "@text", "font_weight": "bold", "text_align": "center", "margin": "1em 0" },
+    "h2": { "font_size": "17px", "color": "@primary", "font_weight": "bold", "text_align": "left", "margin": "1.4em 0 0.9em", "padding": "9px 14px", "background": "rgba(81, 151, 248, 0.13)", "border_top": "2px solid @primary", "display": "inline-block", "box_sizing": "border-box" },
+    "h3": { "font_size": "16px", "color": "@primary", "font_weight": "bold", "text_align": "left", "margin": "1.2em 0 0.6em", "padding": "0 0 0 10px", "border_left": "3px solid @primary" },
+    "strong": "@accent",
+    "mark": { "bg": "@highlight_bg", "color": "#1a1a1a" },
+    "quote": { "background": "#f2f7ff", "border_left": "4px solid @primary", "color": "#555555", "padding": "12px 16px", "border_radius": "6px", "margin": "1.5em 0", "font_size": "16px" },
+    "divider": { "border_top": "1px solid #e3e3e3", "margin": "@divider_margin" },
+    "list": { "item_spacing": "0.4em", "color": "@text", "marker": "@primary" },
+    "image": { "caption_color": "@gray", "caption_size": "15px", "caption_align": "center", "caption_letter_spacing": "2px", "radius": "0" },
+    "callout_tip": { "bg": "#e8f5e9", "color": "#2e7d32" },
+    "callout_warning": { "bg": "#fff3e0", "color": "#ef6c00" },
+    "callout_info": { "bg": "#e3f2fd", "color": "#1565c0" },
+    "section_title": { "background": "@highlight_bg", "color": "@text", "font_size": "18px", "font_weight": "bold", "display": "inline-block", "padding": "0 6px", "margin": "1.5em 0 0.6em", "line_height": "@line_height" },
+    "item_title": { "color": "@primary", "font_size": "16px", "font_weight": "bold", "margin": "1.2em 0 0.4em" },
+    "intro": { "color": "@gray", "font_size": "15px", "letter_spacing": "2px", "text_align": "center", "line_height": "@line_height", "margin": "0 0 1.2em" },
+    "footer": { "color": "@gray", "font_size": "14px", "text_align": "center", "margin": "28px 0 0", "border_top": "1px solid #eee", "padding_top": "18px" },
+    "action_tip": { "color": "@accent", "font_size": "16px", "margin": "1.2em 0", "line_height": "1.8" },
+    "tip_box": { "background": "#f7f8fa", "border_left": "4px solid @primary", "padding": "14px 18px", "margin": "1.5em 0", "color": "@text", "font_size": "15px", "line_height": "1.7" }
+  }
+}

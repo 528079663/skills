@@ -1,0 +1,230 @@
+/* ============================================================
+ * 五步排版法 · 标准模块 CSS（var 驱动）
+ * 由 draft_cli --emit standard 在文件顶部注入 :root 后整体使用。
+ * 不要手写具体色值——所有颜色/字号/间距都来自 :root 令牌，
+ * 改令牌即可全局换肤（见 references/themes/<账号>.json 的 tokens）。
+ * 微信编辑器会剥掉 <style>/class，所以此文件仅用于：
+ *   - 本地预览（preview 服务）
+ *   - 自托管/归档 HTML
+ * 贴公众号请用默认内联模式（--emit inline）。
+ * ============================================================ */
+
+/* ---- :root 由 draft_cli 按 tokens 注入，形如：
+:root {
+  --primary: #d92142;
+  --accent: #2e81da;
+  --highlight-bg: #fffb00;
+  --text-color: #3e3e3e;
+  --gray: #888888;
+  --max-width: 677px;
+  --base-font: 16px;
+  --line-height: 2em;
+  --font-family: -apple-system, ...;
+}
+---- */
+
+/* -------- 容器 -------- */
+.article-wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: #fff;
+  padding: 24px 20px;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  box-sizing: border-box;
+  line-height: var(--line-height);
+}
+
+/* -------- 正文段落（标准模式直接用 <p>，样式由容器统一） -------- */
+.article-wrap p {
+  font-size: var(--base-font);
+  line-height: var(--line-height);
+  margin: 0 0 1em;
+  text-align: justify;
+  color: var(--text-color);
+}
+
+/* -------- 主标题 -------- */
+.article-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  border-bottom: 1px solid #e7e7eb;
+  padding-bottom: 10px;
+  margin: 0 0 1em;
+  line-height: 1.4;
+}
+
+/* -------- 次级标题（markdown ##） -------- */
+.sub-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 1.1em 0 0.5em;
+  line-height: 1.5;
+}
+
+/* -------- 小标题圆形数字徽章（可选，主题开启 heading_badge） -------- */
+.h-badge {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+/* -------- 三级标题（markdown ###） -------- */
+.sub-sub {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 1em 0 0.4em;
+}
+
+/* -------- 引言/作者区（居中灰色） -------- */
+.intro-block {
+  text-align: center;
+  font-size: 15px;
+  color: var(--gray);
+  letter-spacing: 2px;
+  line-height: 2em;
+  margin: 0 0 1.2em;
+}
+
+/* -------- 一级大板块（黄底） -------- */
+.section-title {
+  font-weight: 700;
+  background: var(--highlight-bg);
+  color: var(--text-color);
+  display: inline-block;
+  padding: 0 6px;
+  margin: 1.5em 0 0.6em;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* -------- 二级分论点（红色加粗） -------- */
+.item-title {
+  font-weight: 700;
+  color: var(--primary);
+  margin: 1.2em 0 0.4em;
+  font-size: 16px;
+}
+
+/* -------- 带对勾的建议（✅） -------- */
+.action-tip {
+  color: var(--primary);
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: var(--base-font);
+}
+.action-tip .check { margin-right: 6px; }
+
+/* -------- 行内高亮金句（黄底） -------- */
+.highlight {
+  background: var(--highlight-bg);
+  font-weight: 700;
+  padding: 0 4px;
+  color: var(--text-color);
+}
+
+/* -------- 带边框提示块（ps / 备注） -------- */
+.tip-box {
+  background: #f7f8fa;
+  border-left: 4px solid var(--primary);
+  padding: 14px 18px;
+  margin: 1.5em 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+/* -------- 引用块 -------- */
+.quote-block {
+  background: rgba(81, 151, 248, 0.13);
+  border-left: 4px solid var(--accent);
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin: 1.5em 0;
+  color: var(--text-color);
+}
+
+/* -------- 提示框（tip/warning/info） -------- */
+.callout {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 1.2em 0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.callout-tip { background: rgba(81, 151, 248, 0.13); color: var(--accent); }
+.callout-warning { background: rgba(217, 33, 66, 0.10); color: var(--primary); }
+.callout-info { background: #f5f6f8; color: #5a5a5a; }
+
+/* -------- 图片 -------- */
+.article-img {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+  margin: 1em auto;
+}
+.img-caption {
+  color: var(--gray);
+  font-size: 14px;
+  text-align: center;
+  margin: 0.4em 0 1.2em;
+}
+
+/* -------- 分割线 -------- */
+.divider {
+  border: none;
+  border-top: 1px solid #e3e3e3;
+  margin: 2em 0;
+}
+
+/* -------- 底部签名 -------- */
+.article-footer {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-size: 14px;
+  color: var(--gray);
+}
+
+/* -------- 列表 -------- */
+.article-wrap ul,
+.article-wrap ol {
+  padding-left: 1.4em;
+  margin: 1em 0;
+  color: var(--text-color);
+}
+.article-wrap li {
+  margin: 0 0 0.5em;
+  line-height: var(--line-height);
+}
+
+/* -------- 行内强调（标准模式由令牌驱动） -------- */
+.article-wrap strong { color: var(--primary); font-weight: 700; }
+.article-wrap em { font-style: italic; }
+.article-wrap code {
+  background: #f2f2f2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 90%;
+  color: #c7254e;
+}
+
+/* -------- 移动端适配 -------- */
+@media (max-width: 640px) {
+  .article-wrap { padding: 16px 14px; }
+  .article-title { font-size: 20px; }
+  .section-title { font-size: 17px; }
+}

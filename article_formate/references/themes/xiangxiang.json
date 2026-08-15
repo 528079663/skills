@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "name": "想想妈妈养娃日记 · 育儿公众号主题（已校准，五步法令牌版）",
+    "extracted_from": [
+      "https://mp.weixin.qq.com/s/MYAjxtA-tSDqLD5vdYqW0A",
+      "https://mp.weixin.qq.com/s/JF43avwF1hKZC1uTR_tj6A",
+      "https://mp.weixin.qq.com/s/h6e-iOTETfrcnFVBfJw6jg",
+      "https://mp.weixin.qq.com/s/sjX8gSt3OGL4vLdkqHSWbA",
+      "https://mp.weixin.qq.com/s/FyRMIZ7zT4M5OYPX4fJIHw",
+      "https://mp.weixin.qq.com/s/CdTXiKEbGgaA8-zelVMmiQ"
+    ],
+    "note": "根据 6 篇样本（账号：想想妈妈养娃日记）提取的公共排版逻辑。正文 16px、深灰 #3e3e3e、行距 2em；小标题与关键词用品牌红 #d92142；引用/提示用浅蓝底 rgba(81,151,248,0.13)；重点句黄底 #fffb00 高亮；图注灰 #888。tokens 为设计令牌单一真源，blocks 内以 @token 引用，改令牌即可全局换色。第 7 个链接已失效未计入。"
+  },
+  "page": {
+    "background": "#ffffff",
+    "font_family": "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "tokens": {
+    "primary": "#d92142",
+    "accent": "#2e81da",
+    "highlight_bg": "#fffb00",
+    "text": "#3e3e3e",
+    "gray": "#888888",
+    "max_width": "677px",
+    "base_font": "16px",
+    "line_height": "2em",
+    "paragraph_spacing": "1.5em",
+    "section_top": "1.5em",
+    "divider_margin": "2em 0",
+    "image_margin": "1em auto",
+    "font_family": "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "blocks": {
+    "body": { "font_size": "@base_font", "color": "@text", "line_height": "@line_height", "letter_spacing": "0.5px", "paragraph_spacing": "@paragraph_spacing", "text_align": "left" },
+    "h1": { "font_size": "20px", "color": "@primary", "font_weight": "bold", "text_align": "left", "margin": "1.2em 0 0.6em" },
+    "h2": { "font_size": "18px", "color": "@primary", "font_weight": "bold", "text_align": "left", "margin": "1.1em 0 0.5em" },
+    "h3": { "font_size": "16px", "color": "@text", "font_weight": "bold", "text_align": "left", "margin": "1em 0 0.4em" },
+    "strong": "@primary",
+    "mark": { "bg": "@highlight_bg", "color": "#1a1a1a" },
+    "quote": { "background": "rgba(81, 151, 248, 0.13)", "border_left": "4px solid @accent", "color": "@text", "padding": "14px 16px", "border_radius": "8px", "margin": "1.5em 0", "font_size": "16px" },
+    "divider": { "border_top": "1px solid #e3e3e3", "margin": "@divider_margin" },
+    "list": { "item_spacing": "0.5em", "color": "@text", "marker": "@primary" },
+    "image": { "caption_color": "@gray", "caption_size": "14px", "caption_align": "center", "radius": "6px" },
+    "callout_tip": { "bg": "rgba(81, 151, 248, 0.13)", "color": "@accent" },
+    "callout_warning": { "bg": "rgba(217, 33, 66, 0.10)", "color": "@primary" },
+    "callout_info": { "bg": "#f5f6f8", "color": "#5a5a5a" },
+    "section_title": { "background": "@highlight_bg", "color": "@text", "font_size": "18px", "font_weight": "bold", "display": "inline-block", "padding": "0 6px", "margin": "1.5em 0 0.6em", "line_height": "@line_height" },
+    "item_title": { "color": "@primary", "font_size": "16px", "font_weight": "bold", "margin": "1.2em 0 0.4em" },
+    "intro": { "color": "@gray", "font_size": "15px", "letter_spacing": "2px", "text_align": "center", "line_height": "@line_height", "margin": "0 0 1.2em" },
+    "footer": { "color": "@gray", "font_size": "14px", "text_align": "center", "margin": "28px 0 0", "border_top": "1px solid #eee", "padding_top": "18px" },
+    "action_tip": { "color": "@primary", "font_size": "16px", "margin": "1.2em 0", "line_height": "1.8" },
+    "tip_box": { "background": "#f7f8fa", "border_left": "4px solid @primary", "padding": "14px 18px", "margin": "1.5em 0", "color": "@text", "font_size": "15px", "line_height": "1.7" }
+  }
+}

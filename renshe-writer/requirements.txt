@@ -1,0 +1,3 @@
+# renshe-writer - 写作人设工坊依赖（统一版本）
+flask==3.0.3
+beautifulsoup4==4.12.3

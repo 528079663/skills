@@ -1,0 +1,56 @@
+{
+  "default_theme": "xiangxiang",
+  "available": [
+    "xiangxiang",
+    "proluo",
+    "warm-brown",
+    "deep-blue",
+    "sage-green",
+    "rose-red",
+    "forest",
+    "purple"
+  ],
+  "note": "本文件只作主题分发器。各账号完整配置见同目录 themes/<账号名>.json。用 --theme 账号名 切换；省略时用 default_theme。新主题基于《公众号排版完全指南》配色方法论生成，卡片统一用 blockquote、分割线用 hr、全程内联样式。",
+  "themes": {
+    "xiangxiang": {
+      "account": "想想妈妈养娃日记",
+      "style": "红标题 + 深灰正文(行距2em) + 浅蓝引用块 + 黄底高亮",
+      "file": "themes/xiangxiang.json"
+    },
+    "proluo": {
+      "account": "普罗的小生活",
+      "style": "蓝标小标题(浅蓝底+蓝顶边) + 近黑正文(行距1.8) + 蓝引用块 + 黄底高亮",
+      "file": "themes/proluo.json"
+    },
+    "warm-brown": {
+      "account": "暖棕金",
+      "style": "理财/成长/生活：暖棕主色 + 米白卡片 + 深棕大标题，小标题带数字徽章",
+      "file": "themes/warm-brown.json"
+    },
+    "deep-blue": {
+      "account": "深蓝灰",
+      "style": "职场/干货/科技：深蓝灰主色 + 浅灰蓝卡片 + 近黑大标题，小标题带数字徽章",
+      "file": "themes/deep-blue.json"
+    },
+    "sage-green": {
+      "account": "莫兰迪绿",
+      "style": "治愈/母婴/自我成长：莫兰迪绿主色 + 浅绿卡片 + 墨绿大标题",
+      "file": "themes/sage-green.json"
+    },
+    "rose-red": {
+      "account": "胭脂红",
+      "style": "情感/女性/国风：胭脂红主色 + 浅红卡片 + 暗红大标题",
+      "file": "themes/rose-red.json"
+    },
+    "forest": {
+      "account": "墨绿文艺",
+      "style": "读书/观点：墨绿主色 + 浅绿卡片 + 深墨绿大标题",
+      "file": "themes/forest.json"
+    },
+    "purple": {
+      "account": "星河紫",
+      "style": "年轻/科技/创意：星河紫主色 + 浅紫卡片 + 深紫大标题",
+      "file": "themes/purple.json"
+    }
+  }
+}

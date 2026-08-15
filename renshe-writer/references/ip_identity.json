@@ -1,0 +1,14 @@
+{
+  "_comment": "成文身份映射 —— 单一事实来源 (single source of truth)。任何 skill / 文档 / 数据引用福宝妈妈 IP 时，必须引用本文件的 key（ip_key），禁止写死副本。变更落款/署名/自称/宝宝名只改这里，全局生效。母婴人设的 author_mapping 只存 {\"ip_key\": \"福宝妈妈\", \"resolved\": true}，由 persona_manager 在 view/export 时解析为本文件对应块。",
+  "ip_identities": {
+    "福宝妈妈": {
+      "domain": "母婴",
+      "sign_name": "福宝妈妈",
+      "signoff": "福宝妈妈育儿笔记",
+      "self_refer": "小琳/福宝妈妈",
+      "baby_name": "福宝",
+      "resolved": true,
+      "note": "母婴领域固定映射（宪法级，修正优先）"
+    }
+  }
+}

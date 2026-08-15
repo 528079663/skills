@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>renshe-writer 管理端</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --line:#e3e6ea; --pri:#2f6fed; --pri-d:#1f54b8; --mut:#8a93a0; --ok:#1f9d55; --err:#d23f3f; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; background:var(--bg); color:#222; }
+  header { background:var(--pri); color:#fff; padding:14px 20px; display:flex; align-items:center; gap:14px; }
+  header h1 { font-size:17px; margin:0; font-weight:600; }
+  #health { margin-left:auto; font-size:12px; opacity:.9; }
+  #health.err { color:#ffd9d9; }
+  main { max-width:980px; margin:18px auto; padding:0 16px; display:grid; gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  .card h2 { margin:0 0 12px; font-size:15px; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  input, textarea { border:1px solid var(--line); border-radius:7px; padding:8px 10px; font:inherit; background:#fff; }
+  input[type=text], #newName, #viewKey, #htmlInput { flex:1; min-width:200px; }
+  textarea { width:100%; min-height:90px; resize:vertical; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; }
+  button { border:0; background:var(--pri); color:#fff; padding:8px 14px; border-radius:7px; cursor:pointer; font:inherit; }
+  button:hover { background:var(--pri-d); }
+  button.ghost { background:#eef1f5; color:#344; }
+  button.danger { background:var(--err); }
+  table { width:100%; border-collapse:collapse; margin-top:10px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:12px; color:var(--mut); font-weight:600; }
+  td pre { margin:0; white-space:pre-wrap; word-break:break-all; font-size:12px; }
+  .tag { display:inline-block; background:#eef1f5; border-radius:5px; padding:1px 7px; font-size:12px; color:#455; }
+  .msg { margin-top:10px; font-size:13px; }
+  .msg.ok { color:var(--ok); }
+  .msg.err { color:var(--err); }
+  .muted { color:var(--mut); font-size:12px; }
+  pre.out { background:#0f1722; color:#d6e2f0; padding:12px; border-radius:8px; overflow:auto; max-height:320px; white-space:pre-wrap; word-break:break-all; font-size:12px; margin-top:10px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>写作人设工坊 · 管理端</h1>
+  <div id="health">检测中…</div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>人设列表</h2>
+    <div class="row">
+      <button id="refresh">刷新列表</button>
+      <span class="muted">点击「查看」可展开 JSON；删除前会二次确认。</span>
+    </div>
+    <table>
+      <thead><tr><th style="width:46px">#</th><th>名称</th><th>ID</th><th>更新时间</th><th style="width:160px">操作</th></tr></thead>
+      <tbody id="plist"><tr><td colspan="5" class="muted">暂无数据</td></tr></tbody>
+    </table>
+    <div id="listMsg" class="msg"></div>
+  </section>
+
+  <section class="card">
+    <h2>新建人设</h2>
+    <div class="row"><input type="text" id="newName" placeholder="人设名称，如 福宝妈·温柔坚定育儿"></div>
+    <textarea id="newProfile" placeholder='profile JSON，例如：&#10;{"role":"宝妈","tone":"温柔坚定","audience":"0-3岁宝宝妈妈","values":["科学育儿"],"writing_craft":{"structure":"问题-共情-方法-鼓励"}}'></textarea>
+    <div class="row" style="margin-top:10px"><button id="addBtn">添加人设</button></div>
+    <div id="addMsg" class="msg"></div>
+  </section>
+
+  <section class="card">
+    <h2>查看 / 编辑</h2>
+    <div class="row">
+      <input type="text" id="viewKey" placeholder="人设 id 或名称">
+      <button id="viewBtn">查看</button>
+    </div>
+    <pre class="out" id="viewOut">（此处显示人设完整 JSON）</pre>
+    <div class="row" style="margin-top:10px">
+      <button class="ghost" id="editBtn">按上方 JSON 提交 PATCH 修改</button>
+    </div>
+    <div id="viewMsg" class="msg"></div>
+  </section>
+
+  <section class="card">
+    <h2>HTML 预处理（去噪 + OCR 合并）</h2>
+    <div class="row">
+      <input type="text" id="htmlInput" placeholder="本地 html 绝对路径，或文章 URL">
+      <button id="preBtn">预处理</button>
+    </div>
+    <pre class="out" id="preOut">（此处显示预处理后的素材）</pre>
+    <div id="preMsg" class="msg"></div>
+  </section>
+</main>
+
+<script>
+const api = (p, opt) => fetch(p, opt).then(async r => {
+  let j = null; try { j = await r.json(); } catch (e) {}
+  return { ok: r.ok, j };
+});
+function show(el, text, kind) {
+  const e = document.getElementById(el);
+  e.textContent = text; e.className = "msg" + (kind ? " " + kind : "");
+}
+function isErr(j) { return j && j.code && j.code !== "A000000"; }
+
+async function health() {
+  const { ok, j } = await api("/health");
+  const e = document.getElementById("health");
+  if (ok && j) { e.textContent = "● 已连接  store: " + (j.store || ""); e.classList.remove("err"); }
+  else { e.textContent = "● 未连接（服务未启动？）"; e.classList.add("err"); }
+}
+
+async function loadList() {
+  const { ok, j } = await api("/api/v1/personas");
+  const tb = document.getElementById("plist");
+  if (!ok || !Array.isArray(j)) { tb.innerHTML = '<tr><td colspan="5" class="muted">加载失败</td></tr>'; show("listMsg", "加载失败", "err"); return; }
+  if (j.length === 0) { tb.innerHTML = '<tr><td colspan="5" class="muted">暂无数据</td></tr>'; show("listMsg", ""); return; }
+  tb.innerHTML = j.map((p, i) => `<tr>
+    <td>${i + 1}</td>
+    <td><b>${esc(p.name || "")}</b></td>
+    <td><span class="tag">${esc(p.id || "")}</span></td>
+    <td class="muted">${esc(p.updated_at || p.created_at || "")}</td>
+    <td>
+      <button class="ghost" onclick="viewKey('${esc(p.id)}')">查看</button>
+      <button class="danger" onclick="del('${esc(p.id)}')">删除</button>
+    </td></tr>`).join("");
+  show("listMsg", `共 ${j.length} 套人设`, "ok");
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c])); }
+function viewKey(k) { document.getElementById("viewKey").value = k; document.getElementById("viewBtn").click(); }
+
+async function view() {
+  const key = document.getElementById("viewKey").value.trim();
+  if (!key) { show("viewMsg", "请填写 id 或名称", "err"); return; }
+  const { ok, j } = await api("/api/v1/personas/" + encodeURIComponent(key));
+  const out = document.getElementById("viewOut");
+  if (isErr(j)) { out.textContent = ""; show("viewMsg", j.msg || "未找到", "err"); return; }
+  out.textContent = JSON.stringify(j, null, 2);
+  show("viewMsg", "已加载，可编辑上方 JSON 后点「提交 PATCH 修改」", "ok");
+}
+
+async function edit() {
+  const key = document.getElementById("viewKey").value.trim();
+  const raw = document.getElementById("viewOut").textContent;
+  if (!key) { show("viewMsg", "请先查看再修改", "err"); return; }
+  let patch; try { patch = JSON.parse(raw); } catch (e) { show("viewMsg", "JSON 解析失败：" + e.message, "err"); return; }
+  const { ok, j } = await api("/api/v1/personas/" + encodeURIComponent(key), {
+    method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(patch)
+  });
+  if (isErr(j)) { show("viewMsg", j.msg || "修改失败", "err"); return; }
+  show("viewMsg", "已保存", "ok"); loadList();
+}
+
+async function add() {
+  const name = document.getElementById("newName").value.trim();
+  const raw = document.getElementById("newProfile").value.trim();
+  if (!name) { show("addMsg", "请填写名称", "err"); return; }
+  let profile; try { profile = raw ? JSON.parse(raw) : {}; } catch (e) { show("addMsg", "profile JSON 解析失败：" + e.message, "err"); return; }
+  const { ok, j } = await api("/api/v1/personas", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, profile })
+  });
+  if (isErr(j)) { show("addMsg", j.msg || "添加失败", "err"); return; }
+  show("addMsg", "已添加：" + (j.name || "") + "  (id=" + (j.id || "") + ")", "ok");
+  document.getElementById("newName").value = ""; document.getElementById("newProfile").value = "";
+  loadList();
+}
+
+async function del(key) {
+  if (!confirm("确认删除人设 " + key + "？此操作不可恢复。")) return;
+  const { ok, j } = await api("/api/v1/personas/" + encodeURIComponent(key), { method: "DELETE" });
+  if (isErr(j)) { alert(j.msg || "删除失败"); return; }
+  loadList();
+}
+
+async function preprocess() {
+  const v = document.getElementById("htmlInput").value.trim();
+  if (!v) { show("preMsg", "请填写本地 html 路径或 URL", "err"); return; }
+  const body = v.startsWith("http://") || v.startsWith("https://") ? { url: v } : { html_path: v };
+  const { ok, j } = await api("/api/v1/preprocess", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+  });
+  const out = document.getElementById("preOut");
+  if (isErr(j)) { out.textContent = ""; show("preMsg", j.msg || "预处理失败", "err"); return; }
+  out.textContent = JSON.stringify(j.material, null, 2);
+  show("preMsg", "预处理完成", "ok");
+}
+
+document.getElementById("refresh").onclick = loadList;
+document.getElementById("addBtn").onclick = add;
+document.getElementById("viewBtn").onclick = view;
+document.getElementById("editBtn").onclick = edit;
+document.getElementById("preBtn").onclick = preprocess;
+health(); loadList();
+setInterval(health, 15000);
+</script>
+</body>
+</html>

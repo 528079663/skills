@@ -1,0 +1,2 @@
+# meta-web-fetch - 网页抓取与正文提取依赖（统一版本）
+beautifulsoup4==4.12.3
