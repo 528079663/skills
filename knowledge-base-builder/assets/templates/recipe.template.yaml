@@ -1,0 +1,26 @@
+<!--
+模板：recipe.template.yaml（项目配方）
+变量：{{project}} 项目名；{{date}} 日期
+用法见 references/06_retrieval.md：
+  filters 同维多值=OR、跨维=AND；exclude=NOT；rank 排序；limit=top-k。
+  “过时”同时映射笔记 stale:true。六维标签值须在受控词表或标记候选。
+  topics 来自 08 层1（内容主题层），自由生长、非受控；filters 里按完全匹配过滤，不做同义归一。
+-->
+project: "{{project}}"
+filters:
+  domains: []
+  forms: []
+  tools: []
+  types: []
+  topics: []        # 内容主题层，可选项
+keywords: ""
+# exclude 可选值：过时 / 草稿 / 低信心低质量 / 含个人敏感信息
+# 默认推荐 [过时, 草稿, 低信心低质量]；对外分享项目应加"含个人敏感信息"
+exclude: [过时, 草稿, 低信心低质量]
+rank: [相关度, 时间]
+limit: 50
+# 可选：units 过滤（开 units 后按类型/置信/状态拉取）
+units_type: []
+units_confidence: []
+units_status: []
+created: {{date}}

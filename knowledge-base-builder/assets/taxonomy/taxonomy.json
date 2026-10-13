@@ -1,0 +1,171 @@
+{
+  "_comment": "知识库受控词表（种子）。主轴为 flow(工作流)→stage(环节)→substage(子分组)，决定物理目录；六维标签与内容主题层为辅助检索，不决定目录。flow/stage 由用户问卷或 AI 从资料归纳、人工确认；substage 为固定 5 值。脚本读取本文件做归一化与校验。",
+  "version": "0.2-workflow",
+  "hierarchy_max_depth": 2,
+  "core_tag_range": [10, 30],
+  "archive_after_days": 180,
+
+  "primary_axis": {
+    "_comment": "主轴：每篇原子笔记归 1 个 flow、1 个 stage、1 个 substage；flow+stage 决定物理位置，substage 决定环节内分组。",
+    "flow": {
+      "label_cn": "工作流",
+      "multi": false,
+      "physical_root": "工作流",
+      "core": ["视频制作", "B站好物", "Codex剪辑", "公众号写作"],
+      "note": "种子仅为示例，必须由用户问卷确认或 AI 从资料归纳后人工确认；不命中则新建。"
+    },
+    "stage": {
+      "label_cn": "环节",
+      "multi": false,
+      "physical_pattern": "工作流/<flow>/<n>_<stage>",
+      "core": ["选题", "找素材", "写文案", "做视频", "发布", "运营", "复盘"],
+      "note": "环节名+顺序由用户问卷或 AI 从资料章节归纳；目录名带序号前缀（1_、2_）。"
+    },
+    "substage": {
+      "label_cn": "子分组",
+      "multi": false,
+      "fixed": ["总览", "子技巧", "案例", "工具", "坑"],
+      "note": "固定 5 值，不自由生长；在 _总览.md 中按此分组聚合笔记。"
+    }
+  },
+
+  "auxiliary_dimensions": {
+    "_comment": "六维辅助标签：用于跨工作流检索，不决定目录；维度人工定义，核心标签建议初值需用户确认，长尾 AI 建议、人工确认后生效。",
+    "domains": {
+      "label_cn": "领域",
+      "multi": true,
+      "core": ["AI", "编程", "商业", "营销", "设计"]
+    },
+    "forms": {
+      "label_cn": "形态",
+      "multi": true,
+      "core": ["自媒体", "视频", "文章", "直播", "播客", "提示词"]
+    },
+    "tools": {
+      "label_cn": "工具/技术",
+      "multi": true,
+      "core": ["Codex", "Claude", "Cursor", "AI Agent", "Skills", "ComfyUI",
+               "即梦", "可灵", "剪辑", "微信小程序", "n8n", "WorkBuddy"]
+    },
+    "types": {
+      "label_cn": "类型",
+      "multi": true,
+      "core": ["教程", "案例", "复盘", "素材", "观点", "SOP", "资源", "问答"]
+    },
+    "projects": {
+      "label_cn": "项目",
+      "multi": true,
+      "core": ["AI自媒体", "B站好物", "视频号带货", "小红书虚拟", "YouTube_TK", "Codex剪辑"]
+    },
+    "sources": {
+      "label_cn": "来源",
+      "multi": false,
+      "core": ["妙记", "PDF", "网页剪藏", "原创"]
+    }
+  },
+
+  "synonyms": {
+    "AI": ["人工智能", "ai"],
+    "编程": ["代码", "程序开发"],
+    "Codex": ["codex"],
+    "Claude": ["claude", "claude code", "claudecode"],
+    "Cursor": ["cursor"],
+    "AI Agent": ["agent", "agents", "ai agent", "智能体"],
+    "Skills": ["skill", "skills", "技能"],
+    "ComfyUI": ["comfyui", "comfy ui"],
+    "即梦": ["即梦", "jimeng", "dreamina"],
+    "可灵": ["可灵", "kling"],
+    "剪辑": ["剪辑", "剪映", "capcut"],
+    "微信小程序": ["微信小程序", "小程序", "miniprogram"],
+    "n8n": ["n8n"],
+    "WorkBuddy": ["workbuddy", "work buddy"],
+    "自媒体": ["自媒体", "新媒体"],
+    "视频": ["视频", "短视频"],
+    "文章": ["文章", "公众号", "图文"],
+    "直播": ["直播", "妙记"],
+    "YouTube_TK": ["youtube", "ypp", "shorts", "tiktok", "tk", "出海"],
+    "B站好物": ["b站", "好物", "悬赏", "蓝链"],
+    "视频号带货": ["视频号"],
+    "小红书虚拟": ["小红书", "小绿书"],
+    "AI视频": ["ai生成视频", "ai视频", "生成视频"],
+    "AI绘画": ["ai绘画", "生图", "ai绘画·生图"],
+    "教程": ["教程", "保姆级", "手把手", "攻略", "玩法", "指南", "从0到1", "实战", "入门"],
+    "案例": ["案例", "例子", "实例", "实录"],
+    "复盘": ["复盘", "总结"],
+    "观点": ["观点", "测评", "评测", "盘点", "看法"],
+    "SOP": ["sop", "手册", "流程", "工作流"],
+    "问答": ["问答", "q&a", "qa"],
+    "素材": ["素材", "资料", "参考", "选题库", "文案库"],
+    "资源": ["资源", "工具集", "链接合集", "插件库"],
+    "PDF": ["pdf"],
+    "网页剪藏": ["剪藏", "网页", "webclip"],
+    "妙记": ["妙记", "飞书妙记"]
+  },
+  "quality_flags": ["过时", "草稿", "低质量"],
+
+  "project_seed_recipes": [
+    {
+      "project": "AI自媒体",
+      "filters": {"domains": ["AI"], "forms": ["自媒体"],
+                  "types": ["教程", "案例", "复盘", "素材"]},
+      "exclude": ["过时", "草稿"],
+      "rank": ["相关度", "时间"],
+      "units_type": [],
+      "units_confidence": [],
+      "units_status": []
+    },
+    {
+      "project": "Codex剪辑",
+      "filters": {"domains": ["AI"], "tools": ["Codex", "剪辑"],
+                  "types": ["教程", "案例"]},
+      "exclude": ["过时"],
+      "rank": ["相关度"],
+      "units_type": ["claim", "procedure"],
+      "units_confidence": ["high", "medium"],
+      "units_status": ["confirmed"]
+    }
+  ],
+
+  "topic_policy": {
+    "_comment": "内容主题层 topics：生长式、非受控；AI 粗标 1-5 个、人工确认；相近主题由 AI 给候选、人工归并。辅助层，不决定物理目录。",
+    "max_per_doc": 5,
+    "min_len": 2,
+    "merge_suggest_docs": 3
+  },
+
+  "note_kind_policy": {
+    "_comment": "笔记类型：原子笔记为主（按高价值块），来源笔记为文档级索引；旧的 card/topic/deep 深度档作为原子笔记的深度选择。",
+    "atomic_note": {
+      "frontmatter": ["flow", "stage", "substage", "domains", "forms", "tools", "types", "projects", "topics", "sources", "confidence", "status"],
+      "one_note_per": "high_value_chunk",
+      "location": "工作流/<flow>/<n>_<stage>/"
+    },
+    "source_note": {
+      "frontmatter": ["source_doc", "derived_notes", "status"],
+      "one_note_per": "source_document",
+      "location": "素材库/_来源地图/"
+    },
+    "flow_overview": {
+      "file": "_流程.md",
+      "location": "工作流/<flow>/",
+      "generated_by": "build_flows.py"
+    },
+    "stage_overview": {
+      "file": "_总览.md",
+      "location": "工作流/<flow>/<n>_<stage>/",
+      "generated_by": "build_flows.py"
+    }
+  },
+
+  "units_policy": {
+    "_comment": "层3 units 受控词表（辅助层，产物放 概念索引/）。核心四类默认开，扩展三类按目标推断；relation_type 首选受控，长尾人工确认后加入。",
+    "output_root": "概念索引",
+    "core_types": ["claim", "concept", "qa", "open_question"],
+    "extended_types": ["relation", "procedure", "conflict"],
+    "optional_types": ["asset"],
+    "confidence": ["high", "medium", "low"],
+    "status": ["draft", "confirmed", "stale"],
+    "relation_type": ["组成", "因果", "依赖", "对比", "时序", "上下位"],
+    "confidence_thresholds": {"high": 0.8, "medium": 0.6, "low": 0.0}
+  }
+}
