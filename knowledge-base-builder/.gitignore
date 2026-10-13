@@ -1,0 +1,30 @@
+# 运行产物 —— 一律不得进 skill 仓库
+
+# Python 虚拟环境（99.4% 体积来源；见 SKILL.md 装法，按需在工作区重建，不进仓库）
+# 冻结清单路径已脱敏（原指向本地工作区的 env_freeze_*.txt，含个人目录结构，不进仓库）
+/env/
+/venv/
+/.venv/
+/env*.txt
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# 日志
+*.log
+
+# 字节码缓存
+__pycache__/
+*.pyc
+
+# 探针临时夹具（P1–P12 每轮 rmtree 重建，含迷你知识库 / search.db / 生成的 JSON；
+# 详见 probes/wikilink_rules/probe.py:36 注释「git 忽略即可」）
+/probes/**/_work/
+
+# 兜底：任何 sqlite 派生物
+*.db
+*.sqlite
